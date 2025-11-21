@@ -1,0 +1,41 @@
+"""{{ slice_name | to_camel_case }} Repository"""
+from typing import Optional, Dict, Any
+
+
+class {{ slice_name | to_camel_case }}Repository:
+    """
+    {{ slice_name | to_camel_case }} data access.
+
+    For MVP 0.9, this uses mock data.
+    In production, replace with actual database queries.
+    """
+
+    async def get_data(self, key: str) -> Optional[Dict[str, Any]]:
+        """
+        Get data by key (mock implementation).
+
+        Args:
+            key: Data identifier
+
+        Returns:
+            Data dictionary or None if not found
+        """
+        # Mock data for demonstration
+        mock_data = {
+            "demo": {"id": 1, "value": "demo_value"},
+            "test": {"id": 2, "value": "test_value"},
+        }
+        return mock_data.get(key)
+
+    async def save_data(self, data: Dict[str, Any]) -> bool:
+        """
+        Save data (mock implementation).
+
+        Args:
+            data: Data to save
+
+        Returns:
+            True if successful, False otherwise
+        """
+        # Mock save - always succeeds
+        return True

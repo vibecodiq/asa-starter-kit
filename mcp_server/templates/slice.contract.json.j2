@@ -1,0 +1,21 @@
+{
+  "slice_name": "{{ full_slice_name }}",
+  "version": "1.0.0",
+  "domain": "{{ domain }}",
+  "allowed_imports": [
+    "domains.{{ domain }}.slices.{{ slice_name }}.*",
+    "shared.*"
+  ],
+  "public_api": {
+    "endpoint": "POST /api/v1/{{ domain }}/{{ slice_name }}",
+    "handler": "{{ slice_name | to_camel_case }}Handler",
+    "schemas": ["{{ slice_name | to_camel_case }}Request", "{{ slice_name | to_camel_case }}Response"],
+    "exports": [
+      "domains.{{ domain }}.slices.{{ slice_name }}.handler.router"
+    ]
+  },
+  "dependencies": {
+    "shared": [],
+    "external": ["fastapi", "pydantic"]
+  }
+}

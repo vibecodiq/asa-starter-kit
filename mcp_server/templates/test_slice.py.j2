@@ -1,0 +1,55 @@
+"""Tests for {{ slice_name }} slice"""
+import pytest
+from httpx import AsyncClient
+from main import app
+
+
+@pytest.mark.asyncio
+async def test_{{ slice_name }}_success():
+    """Test successful {{ slice_name }} with valid data"""
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        response = await client.post(
+            "/api/v1/{{ domain }}/{{ slice_name }}",
+            json={"data": "test input"}
+        )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["result"] == "success"
+    assert "data" in data
+
+
+@pytest.mark.asyncio
+async def test_{{ slice_name }}_validation_error():
+    """Test {{ slice_name }} with missing required field"""
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        response = await client.post(
+            "/api/v1/{{ domain }}/{{ slice_name }}",
+            json={}
+        )
+
+    assert response.status_code == 422
+
+
+@pytest.mark.asyncio
+async def test_{{ slice_name }}_empty_data():
+    """Test {{ slice_name }} with empty data"""
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        response = await client.post(
+            "/api/v1/{{ domain }}/{{ slice_name }}",
+            json={"data": ""}
+        )
+
+    # Should fail validation (min_length=1)
+    assert response.status_code == 422
+
+
+@pytest.mark.asyncio
+async def test_{{ slice_name }}_invalid_method():
+    """Test {{ slice_name }} with wrong HTTP method"""
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        response = await client.get(
+            "/api/v1/{{ domain }}/{{ slice_name }}"
+        )
+
+    assert response.status_code == 405  # Method Not Allowed

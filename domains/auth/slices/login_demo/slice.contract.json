@@ -1,0 +1,24 @@
+{
+  "slice_name": "auth/login_demo",
+  "version": "1.0.0",
+  "domain": "auth",
+  "allowed_imports": [
+    "domains.auth.slices.login_demo.*",
+    "shared.entities.*",
+    "shared.utils.*"
+  ],
+  "public_api": {
+    "endpoint": "POST /api/v1/auth/login-demo",
+    "handler": "LoginDemoHandler",
+    "schemas": ["LoginRequest", "LoginResponse"],
+    "exports": [
+      "domains.auth.slices.login_demo.handler.router",
+      "domains.auth.slices.login_demo.schemas.LoginRequest",
+      "domains.auth.slices.login_demo.schemas.LoginResponse"
+    ]
+  },
+  "dependencies": {
+    "shared": ["entities.user", "utils.password_hasher", "utils.jwt_service"],
+    "external": ["fastapi", "pydantic"]
+  }
+}

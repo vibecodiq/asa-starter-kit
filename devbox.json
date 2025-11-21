@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetpack-io/devbox/main/devbox.schema.json",
+  "packages": [
+    "python@3.11.9",
+    "poetry@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Setting up ASA Starter Kit environment...'",
+      "python -m venv .venv",
+      "source .venv/bin/activate",
+      "pip install --upgrade pip",
+      "pip install -r requirements.txt",
+      "echo 'Environment ready! Run: python main.py'"
+    ],
+    "scripts": {
+      "start": "python main.py",
+      "test": "pytest",
+      "lint": "ruff check .",
+      "format": "ruff format ."
+    }
+  },
+  "env": {
+    "PYTHONPATH": ".",
+    "ASA_ENV": "development"
+  }
+}

@@ -1,0 +1,70 @@
+# Slice: {{ domain }}/{{ slice_name }}
+
+## Metadata
+- **Domain:** {{ domain }}
+- **Version:** 1.0.0
+- **Estimated LOC:** 300
+
+## 1. Goal
+{{ goal }}
+
+## 2. User Story
+- **As a** user
+- **I want** to {{ func_spec[:100] }}
+- **So that** I can complete my task efficiently
+
+## 3. Functional Requirements
+- **[FR1]** Accept input via POST request
+- **[FR2]** Validate input data
+- **[FR3]** Process request and return response
+- **[FR4]** Handle errors appropriately
+
+## 4. API Contract
+### Endpoint
+```http
+POST /api/v1/{{ domain }}/{{ slice_name }}
+Content-Type: application/json
+
+Request:
+{
+  "data": "string"
+}
+
+Response (200):
+{
+  "result": "success",
+  "data": {}
+}
+
+Response (400):
+{
+  "detail": "Invalid request"
+}
+
+Response (422):
+{
+  "detail": "Validation error"
+}
+```
+
+## 5. Technical Design
+- **Handler:** {{ slice_name | to_camel_case }}Handler – FastAPI route handler
+- **Service:** {{ slice_name | to_camel_case }}Service – Business logic
+- **Repository:** {{ slice_name | to_camel_case }}Repository – Data access (if needed)
+- **Schemas:** {{ slice_name | to_camel_case }}Request, {{ slice_name | to_camel_case }}Response
+
+## 6. Dependencies
+- **Shared:** (none for basic slice)
+- **External:** fastapi, pydantic
+
+## 7. Acceptance Criteria
+- **[AC1]** Valid request returns 200 with expected response
+- **[AC2]** Invalid request returns 400 error
+- **[AC3]** Missing required fields return 422 error
+- **[AC4]** Response time < 200ms for simple operations
+
+## 8. Test Cases
+- **[TC1]** Test successful request with valid data
+- **[TC2]** Test request with invalid data
+- **[TC3]** Test request with missing required fields
+- **[TC4]** Test error handling

@@ -1,0 +1,29 @@
+"""{{ slice_name | to_camel_case }} Schemas"""
+from pydantic import BaseModel, Field
+from typing import Dict, Any
+
+
+class {{ slice_name | to_camel_case }}Request(BaseModel):
+    """{{ slice_name | to_camel_case }} request schema"""
+    data: str = Field(..., description="Input data", min_length=1)
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "data": "example input"
+            }
+        }
+
+
+class {{ slice_name | to_camel_case }}Response(BaseModel):
+    """{{ slice_name | to_camel_case }} response schema"""
+    result: str = Field(..., description="Operation result")
+    data: Dict[str, Any] = Field(default_factory=dict, description="Response data")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "result": "success",
+                "data": {"processed": True}
+            }
+        }

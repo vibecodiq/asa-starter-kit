@@ -1,0 +1,34 @@
+"""{{ slice_name | to_camel_case }} Service"""
+from typing import Optional
+from .schemas import {{ slice_name | to_camel_case }}Request, {{ slice_name | to_camel_case }}Response
+from .repository import {{ slice_name | to_camel_case }}Repository
+
+
+class {{ slice_name | to_camel_case }}Service:
+    """{{ slice_name | to_camel_case }} business logic"""
+
+    def __init__(self):
+        self.repository = {{ slice_name | to_camel_case }}Repository()
+
+    async def execute(self, request: {{ slice_name | to_camel_case }}Request) -> Optional[{{ slice_name | to_camel_case }}Response]:
+        """
+        Execute {{ slice_name }} operation.
+
+        Args:
+            request: Request data
+
+        Returns:
+            Response data or None if operation fails
+        """
+        # Validate request (basic example)
+        if not request.data:
+            return None
+
+        # Process data (placeholder - implement actual logic here)
+        processed_data = {"input": request.data, "processed": True}
+
+        # Return response
+        return {{ slice_name | to_camel_case }}Response(
+            result="success",
+            data=processed_data
+        )
